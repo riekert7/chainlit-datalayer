@@ -6,3 +6,7 @@
 
 # Node modules.
 node_modules/
+
+venv/
+
+
