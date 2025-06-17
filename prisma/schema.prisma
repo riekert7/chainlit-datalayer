@@ -46,6 +46,7 @@ model User {
     metadata   Json
     identifier String
     threads    Thread[]
+    mcpStorage Json?
 
     @@unique([identifier])
     @@index([identifier])
