@@ -1,6 +1,6 @@
 databases:
   - name: chainlit-db
-    databaseName: postgres
+    databaseName: lc_db
     user: lc_user
     # password will be set in the Render dashboard
 
