@@ -11,7 +11,7 @@ services:
     plan: free
     env: node
     buildCommand: npm install
-    startCommand: npx prisma migrate deploy && npm start
+    startCommand: npx prisma migrate deploy
     envVars:
       - key: DATABASE_URL
         fromDatabase:
