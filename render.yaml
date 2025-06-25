@@ -21,6 +21,15 @@ services:
     name: chainlit-datalayer
     env: node
     buildCommand: npm install
-    startCommand: npx prisma migrate deploy && npm start && npx prisma studio
+    startCommand: npx prisma migrate deploy && npm start
+    envVars:
+      - key: POSTGRES_USER
+        value: ${POSTGRES_USER}
+      - key: POSTGRES_PASSWORD
+        value: ${POSTGRES_PASSWORD}
+      - key: POSTGRES_DB
+        value: ${POSTGRES_DB}
+      - key: DATABASE_URL
+        value: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     dependsOn:
       - postgres
