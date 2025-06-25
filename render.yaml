@@ -2,11 +2,13 @@ databases:
   - name: chainlit-db
     databaseName: lc_db
     user: lc_user
+    plan: free
     # password will be set in the Render dashboard
 
 services:
   - type: web
     name: chainlit-datalayer
+    plan: free
     env: node
     buildCommand: npm install
     startCommand: npx prisma migrate deploy && npm start
