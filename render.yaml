@@ -1,7 +1,7 @@
 databases:
   - name: chainlit-db
-    databaseName: ${POSTGRES_DB}
-    user: ${POSTGRES_USER}
+    databaseName: postgres
+    user: lc_user
     # password will be set in the Render dashboard
 
 services:
