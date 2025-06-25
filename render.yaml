@@ -1,0 +1,26 @@
+services:
+  - type: pserv
+    name: postgres
+    env: docker
+    image: postgres:16
+    envVars:
+      - key: POSTGRES_USER
+        value: ${POSTGRES_USER}
+      - key: POSTGRES_PASSWORD
+        value: ${POSTGRES_PASSWORD}
+      - key: POSTGRES_DB
+        value: ${POSTGRES_DB}
+    disk:
+      name: pgdata
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 10
+    ports:
+      - 5432
+
+  - type: web
+    name: chainlit-datalayer
+    env: node
+    buildCommand: npm install
+    startCommand: npx prisma migrate deploy && npm start && npx prisma studio
+    dependsOn:
+      - postgres
