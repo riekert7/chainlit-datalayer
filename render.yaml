@@ -18,9 +18,15 @@ services:
           name: chainlit-db
           property: connectionString
       - key: POSTGRES_USER
-        value: ${POSTGRES_USER}
+        fromDatabase:
+          name: chainlit-db
+          property: user
       - key: POSTGRES_PASSWORD
-        value: ${POSTGRES_PASSWORD}
+        fromDatabase:
+          name: chainlit-db
+          property: password
       - key: POSTGRES_DB
-        value: ${POSTGRES_DB}
+        fromDatabase:
+          name: chainlit-db
+          property: databaseName
       # Add your S3 and other environment variables here as needed
