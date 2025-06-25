@@ -1,35 +1,24 @@
-services:
-  - type: pserv
-    name: postgres
-    env: docker
-    image: postgres:16
-    envVars:
-      - key: POSTGRES_USER
-        value: ${POSTGRES_USER}
-      - key: POSTGRES_PASSWORD
-        value: ${POSTGRES_PASSWORD}
-      - key: POSTGRES_DB
-        value: ${POSTGRES_DB}
-    disk:
-      name: pgdata
-      mountPath: /var/lib/postgresql/data
-      sizeGB: 10
-    ports:
-      - 5432
+databases:
+  - name: chainlit-db
+    databaseName: ${POSTGRES_DB}
+    user: ${POSTGRES_USER}
+    # password will be set in the Render dashboard
 
+services:
   - type: web
     name: chainlit-datalayer
     env: node
     buildCommand: npm install
     startCommand: npx prisma migrate deploy && npm start
     envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: chainlit-db
+          property: connectionString
       - key: POSTGRES_USER
         value: ${POSTGRES_USER}
       - key: POSTGRES_PASSWORD
         value: ${POSTGRES_PASSWORD}
       - key: POSTGRES_DB
         value: ${POSTGRES_DB}
-      - key: DATABASE_URL
-        value: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
-    dependsOn:
-      - postgres
+      # Add your S3 and other environment variables here as needed
