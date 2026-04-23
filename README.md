@@ -137,4 +137,10 @@ APP_GCS_PRIVATE_KEY=ABC...123...XYZ
 BUCKET_NAME= # should be the container name in Azure terminology.
 APP_AZURE_STORAGE_ACCOUNT=dev-store-account-xyz
 APP_AZURE_STORAGE_ACCESS_KEY=F9xkw3NOs...
-```
+```---
+
+## My Changes (fork of [Chainlit/chainlit-datalayer](https://github.com/Chainlit/chainlit-datalayer))
+
+Added a `render.yaml` deployment configuration to run this data layer on [Render](https://render.com) as a managed Postgres service, used as the persistence backend for [litchain](https://github.com/riekert7/litchain/tree/develop):
+
+- **`render.yaml`** — defines the Postgres database service and a one-off migration job that runs `npx prisma migrate deploy` on deploy, keeping the schema in sync automatically without manual intervention
